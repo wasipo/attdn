@@ -4,7 +4,7 @@ x-dev-base: &dev-base
   build: .
   environment:
     DB_HOST: mysql
-    DB_PORT: 3306
+    DB_PORT: 3366
     DB_USERNAME: docker
     DB_PASSWORD: docker
     DB_NAME: nest_next_sample
@@ -28,7 +28,7 @@ services:
       MYSQL_DATABASE: nest_next_sample
       TZ: 'Asia/Tokyo'
     ports:
-      - 4306:3306
+      - ${DB_PORT}:3306
     volumes:
       - ./docker/db/data:/var/lib/mysql
       - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
