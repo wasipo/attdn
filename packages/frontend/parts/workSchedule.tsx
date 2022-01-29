@@ -1,14 +1,14 @@
-import React from "react"
+import React,{useState} from 'react';
 import { format } from 'date-fns';
-import { addYears, formatWithOptions } from 'date-fns/fp'
-import { ja } from 'date-fns/locale'
-import {clockingOut,attendance,resultTodayAttendance,restTime} from './attendance';
-import {addFunction} from './attendanceFunction';
+import {ClockingOut,Attendance,ResultTodayAttendance,RestTime} from './Attendance';
+import {AddFunction} from './AttendanceFunction';
 import {Span} from './style/span';
+import {Modal} from '../layouts/Modal'
 
-const workSchedule = (props) => {
+const WorkSchedule = () => {
 
-//    const dateToString = formatWithOptions({ locale: ja }, 'YYYY/MM/DD')
+    const [showModal,setShowModal] = useState<boolean>(false);
+
     const date = new Date();
 
     const getEndDate = (date: Date):number =>  {
@@ -23,10 +23,10 @@ const workSchedule = (props) => {
     const weekUnion = week.join('|'); 
     const getDayOfWeek = (day:number):string => String(week[(new Date((new Date()).setDate(day))).getDay()]);
 
-    const setDayOfWeekColor = (dayOfWeek,i:number):JSX.Element => {
+    const setDayOfWeekColor = (dayOfWeek: {} | null | undefined,i:number):JSX.Element => {
  
         let result:JSX.Element;
-        let saturday:string = week[6];
+        let saturday:string = week[week.length-1];
         let sunday:string = week[0];
 
 
@@ -45,9 +45,7 @@ const workSchedule = (props) => {
         return result;
     }
 
-    // const isHoliday = () => 
-
-
+    const modalControl = (isState:boolean) => setShowModal(isState)
 
     return (
         <>
@@ -57,11 +55,11 @@ const workSchedule = (props) => {
             for (let i = 1; i < getEndDate(date); i++) 
             {
                 items.push(<td key={'day'+i}>{i}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>)
-                items.push(<td key={'attendance'+i}>{attendance()}</td>)
-                items.push(<td key={'laeve'+i}>{clockingOut()}</td>)
-                items.push(<td key={'rest'+i}>{restTime()}</td>)
-                items.push(<td key={'result'+i}>{resultTodayAttendance()}</td>)
-                items.push(<td key={'addFc'+i}>{addFunction()}</td>)
+                items.push(<td key={'attendance'+i}><Attendance key={'at'+i} /></td>)
+                items.push(<td key={'laeve'+i}><ClockingOut key={'cl'+i} /></td>)
+                items.push(<td key={'rest'+i}><RestTime key={'re'+i} /></td>)
+                items.push(<td key={'result'+i}><ResultTodayAttendance key={'res'+i} /></td>)
+                items.push(<td key={'addFc'+i}><AddFunction key={'ad'+i} modalControl={modalControl} /></td>)
                 parent.push(<tr key={'key'+i}>
                     {items}
                 </tr>);
@@ -69,9 +67,10 @@ const workSchedule = (props) => {
             }
             return parent;
         })()}
+        <Modal showFlag={showModal} modalContol={modalControl} />
         </>
     )
 }
 
 
-export default workSchedule;
+export default WorkSchedule;

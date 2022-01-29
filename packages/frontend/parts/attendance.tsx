@@ -1,23 +1,23 @@
 
-export const attendance = () => {
+export const Attendance = () => {
     return (
         <input type="text" />
     )
 }
 
-export const clockingOut = () => {
+export const ClockingOut = () => {
     return (
         <input type="text" />
     )
 }
 
-export const restTime = () => {
+export const RestTime = () => {
     return (
         <input type="text" />
     )
 }
 
-export const resultTodayAttendance = () => {
+export const ResultTodayAttendance = () => {
     return (
         <input type="text" />
     )

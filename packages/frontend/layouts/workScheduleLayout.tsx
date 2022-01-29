@@ -1,7 +1,7 @@
 import React from 'react';
-import WorkSchedule from '../parts/workSchedule';
+import WorkSchedule from '../parts/WorkSchedule';
 
-const workScheduleLayout = () => {
+const WorkScheduleLayout = () => {
 
 
     return (
@@ -22,4 +22,4 @@ const workScheduleLayout = () => {
 
 }
 
-export default workScheduleLayout;
+export default WorkScheduleLayout;
