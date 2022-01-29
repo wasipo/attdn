@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import WorkSchedule from '../parts/workSchedule'
+import WorkSchedule from '../layouts/workScheduleLayout';
 
 export default function Home() {
   return (
