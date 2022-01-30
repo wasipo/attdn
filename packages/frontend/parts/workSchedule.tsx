@@ -29,7 +29,6 @@ const WorkSchedule = () => {
         let saturday:string = week[week.length-1];
         let sunday:string = week[0];
 
-
         switch(dayOfWeek) {
             case saturday:
                 result = <Span key={'saturday'+i} color={'blue'}>({saturday})</Span>
@@ -54,12 +53,12 @@ const WorkSchedule = () => {
             let items:Array<JSX.Element> = [];
             for (let i = 1; i < getEndDate(date); i++) 
             {
-                items.push(<td key={'day'+i}>{i}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>)
-                items.push(<td key={'attendance'+i}><Attendance key={'at'+i} /></td>)
-                items.push(<td key={'laeve'+i}><ClockingOut key={'cl'+i} /></td>)
-                items.push(<td key={'rest'+i}><RestTime key={'re'+i} /></td>)
-                items.push(<td key={'result'+i}><ResultTodayAttendance key={'res'+i} /></td>)
-                items.push(<td key={'addFc'+i}><AddFunction key={'ad'+i} modalControl={modalControl} /></td>)
+                items.push(<td key={'day'+i} className="px-6 py-4 whitespace-nowrap">{i}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>)
+                items.push(<td key={'attendance'+i} className="px-6 py-4 whitespace-nowrap"><Attendance key={'at'+i} /></td>)
+                items.push(<td key={'laeve'+i} className="px-6 py-4 whitespace-nowrap"><ClockingOut key={'cl'+i} /></td>)
+                items.push(<td key={'rest'+i} className="px-6 py-4 whitespace-nowrap"><RestTime key={'re'+i} /></td>)
+                items.push(<td key={'result'+i} className="px-6 py-4 whitespace-nowrap"><ResultTodayAttendance key={'res'+i} /></td>)
+                items.push(<td key={'addFc'+i} className="px-6 py-4 whitespace-nowrap"><AddFunction key={'ad'+i} modalControl={modalControl} /></td>)
                 parent.push(<tr key={'key'+i}>
                     {items}
                 </tr>);
