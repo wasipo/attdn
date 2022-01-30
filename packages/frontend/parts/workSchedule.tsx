@@ -19,11 +19,11 @@ const WorkSchedule = () => {
        return format(new Date(), 'yyyy/MM/dd');
     }
 
-    const week:string[] = ['日','月','火','水','木','金','土'];
-    const weekUnion = week.join('|'); 
-    const getDayOfWeek = (day:number):string => String(week[(new Date((new Date()).setDate(day))).getDay()]);
+    const week = ['日','月','火','水','木','金','土'] as const;
+    type WeekUnion = typeof week[number];
 
-    const setDayOfWeekColor = (dayOfWeek: {} | null | undefined,i:number):JSX.Element => {
+    const getDayOfWeek = (day:number):string => String(week[(new Date((new Date()).setDate(day))).getDay()]);
+    const setDayOfWeekColor = (dayOfWeek: WeekUnion,i:number):JSX.Element => {
  
         let result:JSX.Element;
         let saturday:string = week[week.length-1];
@@ -54,6 +54,7 @@ const WorkSchedule = () => {
             let items:Array<JSX.Element> = [];
             for (let i = 1; i < getEndDate(date); i++) 
             {
+                setDayOfWeekColor('a',i);
                 items.push(<td key={'day'+i}>{i}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>)
                 items.push(<td key={'attendance'+i}><Attendance key={'at'+i} /></td>)
                 items.push(<td key={'laeve'+i}><ClockingOut key={'cl'+i} /></td>)
