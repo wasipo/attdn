@@ -1,13 +1,18 @@
-import React,{useState} from 'react';
+import React,{useRef, useState} from 'react';
 import { format } from 'date-fns';
 import {ClockingOut,Attendance,ResultTodayAttendance,RestTime} from './Attendance';
 import {AddFunction} from './AttendanceFunction';
 import {Span} from './style/span';
 import {Modal} from '../layouts/Modal'
 
+
 const WorkSchedule = () => {
 
-    const [showModal,setShowModal] = useState<boolean>(false);
+    type WeekUnion = typeof week[number];
+    const week = ['日','月','火','水','木','金','土'] as const;
+
+    const [isShow,setShowModal] = useState<boolean>(false);
+    const cancelButtonRef = useRef(null);
 
     const date = new Date();
 
@@ -18,9 +23,6 @@ const WorkSchedule = () => {
     const getToDay = (): String => {
        return format(new Date(), 'yyyy/MM/dd');
     }
-
-    const week = ['日','月','火','水','木','金','土'] as const;
-    type WeekUnion = typeof week[number];
 
     const getDayOfWeek = (day:number):WeekUnion => week[(new Date((new Date()).setDate(day))).getDay()];
     const setDayOfWeekColor = (dayOfWeek: WeekUnion,i:number):JSX.Element => {
@@ -66,7 +68,7 @@ const WorkSchedule = () => {
             }
             return parent;
         })()}
-        <Modal showFlag={showModal} modalContol={modalControl} />
+        <Modal isShow={isShow} modalContol={modalControl} cancelButtonRef={cancelButtonRef} />
         </>
     )
 }
