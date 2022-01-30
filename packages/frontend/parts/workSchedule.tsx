@@ -22,7 +22,7 @@ const WorkSchedule = () => {
     const week = ['日','月','火','水','木','金','土'] as const;
     type WeekUnion = typeof week[number];
 
-    const getDayOfWeek = (day:number):string => String(week[(new Date((new Date()).setDate(day))).getDay()]);
+    const getDayOfWeek = (day:number):WeekUnion => week[(new Date((new Date()).setDate(day))).getDay()];
     const setDayOfWeekColor = (dayOfWeek: WeekUnion,i:number):JSX.Element => {
  
         let result:JSX.Element;
@@ -54,7 +54,6 @@ const WorkSchedule = () => {
             let items:Array<JSX.Element> = [];
             for (let i = 1; i < getEndDate(date); i++) 
             {
-                setDayOfWeekColor('a',i);
                 items.push(<td key={'day'+i}>{i}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>)
                 items.push(<td key={'attendance'+i}><Attendance key={'at'+i} /></td>)
                 items.push(<td key={'laeve'+i}><ClockingOut key={'cl'+i} /></td>)
