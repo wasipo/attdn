@@ -37,10 +37,10 @@ const WorkScheduleLayout = () => {
                       休憩時間
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    残業時間
+                      当日作業時間
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    残業等追加情報
+                      残業等追加情報
                     </th>
                   </tr>
                 </thead>
