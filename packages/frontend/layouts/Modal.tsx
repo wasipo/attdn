@@ -1,5 +1,5 @@
 import { Transition,Dialog } from "@headlessui/react";
-import React, { Fragment, MutableRefObject } from "react";
+import React, { Fragment, MutableRefObject, useState } from "react";
 import {FcOvertime} from 'react-icons/fc';
 import {OverTime} from '../parts/OverTime';
 
@@ -11,6 +11,9 @@ type WorkScheduleProps = {
 }
 
 export const Modal = (props:WorkScheduleProps) => {
+
+    const[row,setRow] = useState<number>(1);
+    const addOverTimeRow = (row:number) => setRow(++row);
 
     return (
         <Transition.Root show={props.isShow} as={Fragment}>
@@ -50,7 +53,7 @@ export const Modal = (props:WorkScheduleProps) => {
                       <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
                         追加作業時間入力
                       </Dialog.Title>
-                      <OverTime />
+                      <OverTime rowNumber={row} />
                     </div>
                   </div>
                 </div>
@@ -58,7 +61,7 @@ export const Modal = (props:WorkScheduleProps) => {
                  <button
                     type="button"
                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={() => props.modalContol(false)}
+                    onClick={() => addOverTimeRow(row)}
                   >
                     残業時間追加
                   </button>
