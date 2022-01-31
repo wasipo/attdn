@@ -12,6 +12,7 @@ const WorkSchedule = () => {
     const week = ['日','月','火','水','木','金','土'] as const;
 
     const [isShow,setShowModal] = useState<boolean>(false);
+    const [targetRow,setRow] = useState<number>(0);
     const cancelButtonRef = useRef(null);
 
     const date = new Date();
@@ -47,6 +48,7 @@ const WorkSchedule = () => {
     }
 
     const modalControl = (isState:boolean) => setShowModal(isState)
+    const getClickRow = (rowNumber:number) => setRow(rowNumber)
 
     return (
         <>
@@ -60,7 +62,7 @@ const WorkSchedule = () => {
                 items.push(<td key={'laeve'+i} className="px-6 py-4 whitespace-nowrap"><ClockingOut key={'cl'+i} /></td>)
                 items.push(<td key={'rest'+i} className="px-6 py-4 whitespace-nowrap"><RestTime key={'re'+i} /></td>)
                 items.push(<td key={'result'+i} className="px-6 py-4 whitespace-nowrap"><ResultTodayAttendance key={'res'+i} /></td>)
-                items.push(<td key={'addFc'+i} className="px-6 py-4 whitespace-nowrap"><AddFunction key={'ad'+i} modalControl={modalControl} /></td>)
+                items.push(<td key={'addFc'+i} className="px-6 py-4 whitespace-nowrap"><AddFunction key={'ad'+i} modalControl={modalControl} getClickRow={getClickRow} rowNumber={i} /></td>)
                 parent.push(<tr key={'key'+i}>
                     {items}
                 </tr>);
@@ -68,7 +70,7 @@ const WorkSchedule = () => {
             }
             return parent;
         })()}
-        <Modal isShow={isShow} modalContol={modalControl} cancelButtonRef={cancelButtonRef} />
+        <Modal isShow={isShow} targetRow={targetRow} modalContol={modalControl} cancelButtonRef={cancelButtonRef} />
         </>
     )
 }

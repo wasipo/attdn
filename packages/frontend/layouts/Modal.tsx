@@ -5,26 +5,11 @@ import React, { Fragment, MutableRefObject } from "react";
 type WorkScheduleProps = {
     isShow: boolean,
     modalContol: Function,
-    cancelButtonRef: MutableRefObject<HTMLElement | null> | undefined
+    cancelButtonRef: MutableRefObject<HTMLElement | null> | undefined,
+    targetRow: number,
 }
 
 export const Modal = (props:WorkScheduleProps) => {
-
-
-    // return (
-    //     <>
-    //     {props.showFlag ? (
-    //     <div id="overLay">
-    //         <div id="content">
-    //             <p>aaaaaaaaaa</p>
-    //             <button onClick={() => props.modalContol(false)}>close</button>
-    //         </div>
-    //     </div>
-    //     ):(
-    //         <></>
-    //     )}
-    //     </>
-    // )
 
     return (
         <Transition.Root show={props.isShow} as={Fragment}>
