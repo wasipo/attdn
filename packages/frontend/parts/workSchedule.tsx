@@ -21,7 +21,7 @@ const WorkSchedule = () => {
         return Number(format(new Date(date.getFullYear(),date.getMonth()+1,0), 'dd'))+1;
     }
 
-    const getToDay = (): String => {
+    const getToday = (): String => {
        return format(new Date(), 'yyyy/MM/dd');
     }
 
@@ -58,10 +58,10 @@ const WorkSchedule = () => {
             for (let i = 1; i < getEndDate(date); i++) 
             {
                 items.push(<td key={'day'+i} className="px-6 py-4 whitespace-nowrap">{i}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>)
-                items.push(<td key={'attendance'+i} className="px-6 py-4 whitespace-nowrap"><Attendance key={'at'+i} /></td>)
-                items.push(<td key={'laeve'+i} className="px-6 py-4 whitespace-nowrap"><ClockingOut key={'cl'+i} /></td>)
-                items.push(<td key={'rest'+i} className="px-6 py-4 whitespace-nowrap"><RestTime key={'re'+i} /></td>)
-                items.push(<td key={'result'+i} className="px-6 py-4 whitespace-nowrap"><ResultTodayAttendance key={'res'+i} /></td>)
+                items.push(<td key={'attendance'+i} className="px-6 py-4 whitespace-nowrap"><Attendance key={'at'+i} rowNumber={i} /></td>)
+                items.push(<td key={'laeve'+i} className="px-6 py-4 whitespace-nowrap"><ClockingOut key={'cl'+i} rowNumber={i} /></td>)
+                items.push(<td key={'rest'+i} className="px-6 py-4 whitespace-nowrap"><RestTime key={'re'+i} rowNumber={i} /></td>)
+                items.push(<td key={'result'+i} className="px-6 py-4 whitespace-nowrap"><ResultTodayAttendance key={'res'+i} rowNumber={i} /></td>)
                 items.push(<td key={'addFc'+i} className="px-6 py-4 whitespace-nowrap"><AddFunction key={'ad'+i} modalControl={modalControl} getClickRow={getClickRow} rowNumber={i} /></td>)
                 parent.push(<tr key={'key'+i}>
                     {items}
