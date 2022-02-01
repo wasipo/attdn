@@ -4,6 +4,7 @@ import {ClockingOut,Attendance,ResultTodayAttendance,RestTime} from './Attendanc
 import {AddFunction} from './AttendanceFunction';
 import {Span} from './style/span';
 import {Modal} from '../layouts/Modal'
+import {WorkSchedules,KeyName} from '../lib/data/WorkSchedule';
 
 
 const WorkSchedule = () => {
@@ -57,13 +58,14 @@ const WorkSchedule = () => {
             let items:Array<JSX.Element> = [];
             for (let i = 1; i < getEndDate(date); i++) 
             {
-                items.push(<td key={'day'+i} className="px-6 py-4 whitespace-nowrap">{i}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>)
-                items.push(<td key={'attendance'+i} className="px-6 py-4 whitespace-nowrap"><Attendance key={'at'+i} rowNumber={i} /></td>)
-                items.push(<td key={'laeve'+i} className="px-6 py-4 whitespace-nowrap"><ClockingOut key={'cl'+i} rowNumber={i} /></td>)
-                items.push(<td key={'rest'+i} className="px-6 py-4 whitespace-nowrap"><RestTime key={'re'+i} rowNumber={i} /></td>)
-                items.push(<td key={'result'+i} className="px-6 py-4 whitespace-nowrap"><ResultTodayAttendance key={'res'+i} rowNumber={i} /></td>)
-                items.push(<td key={'addFc'+i} className="px-6 py-4 whitespace-nowrap"><AddFunction key={'ad'+i} modalControl={modalControl} getClickRow={getClickRow} rowNumber={i} /></td>)
-                parent.push(<tr key={'key'+i}>
+                let rowData:Array<Object> = [WorkSchedules(i)];
+                items.push(<td key={KeyName.day+rowData[i]} className="px-6 py-4 whitespace-nowrap">{i}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>)
+                items.push(<td key={KeyName.attendance+rowData[i]} className="px-6 py-4 whitespace-nowrap"><Attendance key={'at'+i} rowNumber={i} /></td>)
+                items.push(<td key={KeyName.leave+rowData[i]} className="px-6 py-4 whitespace-nowrap"><ClockingOut key={'cl'+i} rowNumber={i} /></td>)
+                items.push(<td key={KeyName.rest+rowData[i]} className="px-6 py-4 whitespace-nowrap"><RestTime key={'re'+i} rowNumber={i} /></td>)
+                items.push(<td key={KeyName.result+rowData[i]} className="px-6 py-4 whitespace-nowrap"><ResultTodayAttendance key={'res'+i} rowNumber={i} /></td>)
+                items.push(<td key={KeyName.addFc+rowData[i]} className="px-6 py-4 whitespace-nowrap"><AddFunction key={'ad'+i} modalControl={modalControl} getClickRow={getClickRow} rowNumber={i} /></td>)
+                parent.push(<tr key={KeyName.scheduleParent+rowData[i]}>
                     {items}
                 </tr>);
                 items = [];
