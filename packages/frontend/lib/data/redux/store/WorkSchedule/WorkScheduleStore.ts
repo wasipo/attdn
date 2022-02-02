@@ -62,18 +62,21 @@ const storage = typeof window !== "undefined" ? createWebStorage("local") : crea
 const persistConfig = {
   key: 'p-next-work-schedule',
   version: 1,
-  storage:storage,
+  storage:localStorage,
 }
 
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// export const useStore = (): EnhancedStore => {
-//   return configureStore({
-//     reducer: persistedReducer,
-//     middleware: getDefaultMiddleware({
-//       serializableCheck: {
-//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//       },
-//     }),
-//   })
-// }
+const UseStore = (): EnhancedStore => {
+  return configureStore({
+    reducer: persistedReducer,
+    middleware: getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+  })
+}
+
+
+export default UseStore;
