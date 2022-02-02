@@ -44,19 +44,6 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>
 
-
-type a = { 
-  key: string
-  version: number
-  storage: WebStorage
-  | 
-  { 
-    getItem(_key: number): Promise<null>
-    setItem(_key: number, value: object): Promise<object>;
-    removeItem(_key: number): Promise<any>;
-  }; 
-}
-
 const storage = typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
 
 const persistConfig = {
