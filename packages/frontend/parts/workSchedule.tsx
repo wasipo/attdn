@@ -5,9 +5,14 @@ import {AddFunction} from './AttendanceFunction';
 import {Span} from './style/span';
 import {Modal} from '../layouts/Modal'
 import {WorkSchedules,KeyName} from '../lib/data/WorkSchedule';
-
+import {WorkScheduleSlice} from '../lib/data/redux/store/WorkSchedule';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../lib/data/redux/store/WorkSchedule/WorkScheduleStore';
 
 const WorkSchedule = () => {
+
+    const dispatch = useDispatch();
+    const workScheduleData = useSelector((state: RootState) => state.workSchedule)
 
     type WeekUnion = typeof week[number];
     const week = ['日','月','火','水','木','金','土'] as const;
@@ -51,6 +56,22 @@ const WorkSchedule = () => {
     const modalControl = (isState:boolean) => setShowModal(isState)
     const getClickRow = (rowNumber:number) => setRow(rowNumber)
 
+    const handleUpdate = (row:number) => {
+        dispatch(
+            WorkScheduleSlice.actions.addWorkSchedule({
+                rowNumber: row,
+                startDate: new Date(),
+                endDate: new Date(),
+                restTime: '00:00'   
+            })
+        )
+    }
+
+    const handleReset = () => {
+        dispatch(WorkScheduleSlice.actions.reset());
+    }
+
+    console.log(workScheduleData);
     return (
         <>
         {(() => {
