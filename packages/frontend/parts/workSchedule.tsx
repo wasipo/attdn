@@ -5,16 +5,11 @@ import {AddFunction} from './AttendanceFunction';
 import {Span} from './style/span';
 import {Modal} from '../layouts/Modal'
 import {WorkSchedules,KeyName} from '../lib/data/WorkSchedule';
-import {workScheduleRowState, WorkScheduleRow, WorkScheduleState} from '../lib/store/WorkSchedule';
-import { useDispatch, useSelector } from 'react-redux';
 import startOfWeekYear from 'date-fns/esm/startOfWeekYear/index.js';
-import { randomBytes } from 'crypto';
 
 
 const WorkSchedule = () => {
 
-    const dispatch = useDispatch();
-    const workScheduleRow = useSelector((state:workScheduleRowState) => state.workScheduleRow);
     
     type WeekUnion = typeof week[number];
     const week = ['日','月','火','水','木','金','土'] as const;
@@ -25,20 +20,7 @@ const WorkSchedule = () => {
 
     const date = new Date();
 
-    const handleInsert = (row:number) => {
-        dispatch(
-            WorkScheduleRow.actions.addWorkSchedule({
-                rowNumber: row,
-                startDate: '00:00',
-                endDate: '00:00',
-                restTime: '00:00',
-                resultTime: '00:00'   
-            })
-        )
-    }
-    const handleReset = () => {
-        dispatch(WorkScheduleRow.actions.reset());
-    }   
+
 
     const getEndDate = (date: Date):number =>  {
         return Number(format(new Date(date.getFullYear(),date.getMonth()+1,0), 'dd'))+1;
@@ -85,8 +67,8 @@ const WorkSchedule = () => {
             let items:Array<JSX.Element> = [];
             for (let i = 1; i < getEndDate(date); i++) 
             {
-                handleInsert(i+1);
-                console.log('aaaa',workScheduleRow);
+                // handleInsert(i+1);
+                // console.log('cc',workScheduleRow);
                 let rowData:Array<Object> = [WorkSchedules(i)];
                 items.push(<td key={KeyName.day+rowData[i]} className="px-6 py-4 whitespace-nowrap">{i}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>)
                 items.push(<td key={KeyName.attendance+rowData[i]} className="px-6 py-4 whitespace-nowrap"><Attendance key={'at'+i} rowNumber={i} /></td>)

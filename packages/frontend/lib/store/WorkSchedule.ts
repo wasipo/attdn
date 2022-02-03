@@ -22,13 +22,7 @@ const getYoctoTime = (_d:Date) => {
 
 const initialState: WorkScheduleState = {
     workSchedule: [
-        {
-            rowNumber: 0,
-            startDate: '00:00',
-            endDate: '00:00',
-            restTime: '00:00',
-            resultTime: '00:00',
-        }
+
     ],
 }
 
@@ -43,8 +37,9 @@ export const WorkScheduleRow = createSlice({
     //     state.workSchedule = action.payload
     //   },
         addWorkSchedule(state, action: PayloadAction<AddWorkSchedulePayload>) {
-            state.workSchedule.push(action.payload)
+            void state.workSchedule.push(action.payload)
         },
+
         reset(): WorkScheduleState {
             return initialState
         },

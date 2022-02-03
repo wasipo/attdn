@@ -1,9 +1,29 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { WorkScheduleRow, workScheduleRowState } from '../lib/store/WorkSchedule';
 import WorkSchedule from '../parts/WorkSchedule';
 
 
 const WorkScheduleLayout = () => {
+  const dispatch = useDispatch();
+  const workScheduleRow = useSelector((state:workScheduleRowState) => state.workScheduleRow);
 
+  const handleInsert = (row:number) => {
+    dispatch(
+        WorkScheduleRow.actions.addWorkSchedule({
+            rowNumber: row,
+            startDate: '00:00',
+            endDate: '00:00',
+            restTime: '00:00',
+            resultTime: '00:00'   
+        })
+      )
+      console.log(workScheduleRow);
+  }
+  const handleReset = () => {
+      dispatch(WorkScheduleRow.actions.reset());
+  }   
+  
     return (
         <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
