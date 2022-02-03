@@ -1,14 +1,23 @@
 import React,{useRef, useState} from 'react';
 import { format } from 'date-fns';
 import {ClockingOut,Attendance,ResultTodayAttendance,RestTime} from './Attendance';
-import {AddFunction} from './AttendanceFunction';
+import {AddFunction,CompleteButton} from './AttendanceFunction';
 import {Span} from './style/span';
 import {Modal} from '../layouts/Modal'
 import {WorkSchedules,KeyName} from '../lib/data/WorkSchedule';
 import startOfWeekYear from 'date-fns/esm/startOfWeekYear/index.js';
+import { useForm, SubmitHandler } from "react-hook-form";
 
+
+type Inputs = {
+    example: string,
+    exampleRequired: string,
+  };
 
 const WorkSchedule = () => {
+
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+    const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
 
     
     type WeekUnion = typeof week[number];
@@ -19,8 +28,6 @@ const WorkSchedule = () => {
     const cancelButtonRef = useRef(null);
 
     const date = new Date();
-
-
 
     const getEndDate = (date: Date):number =>  {
         return Number(format(new Date(date.getFullYear(),date.getMonth()+1,0), 'dd'))+1;
@@ -76,6 +83,7 @@ const WorkSchedule = () => {
                 items.push(<td key={KeyName.rest+rowData[i]} className="px-6 py-4 whitespace-nowrap"><RestTime key={'re'+i} rowNumber={i} /></td>)
                 items.push(<td key={KeyName.result+rowData[i]} className="px-6 py-4 whitespace-nowrap"><ResultTodayAttendance key={'res'+i} rowNumber={i} /></td>)
                 items.push(<td key={KeyName.addFc+rowData[i]} className="px-6 py-4 whitespace-nowrap"><AddFunction key={'ad'+i} modalControl={modalControl} getClickRow={getClickRow} rowNumber={i} /></td>)
+                items.push(<td key={KeyName.addFc+rowData[i]} className="px-6 py-4 whitespace-nowrap"><CompleteButton key={'ad'+i} modalControl={modalControl} getClickRow={getClickRow} rowNumber={i} /></td>)
                 parent.push(<tr key={'key'+i}>
                     {items}
                 </tr>);
