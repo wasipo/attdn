@@ -1,20 +1,14 @@
 import { combineReducers, configureStore, createSlice, getDefaultMiddleware, PayloadAction } from '@reduxjs/toolkit'
+import {WorkScheduleType} from '../data/WorkSchedule'
 
-export type WorkSchedule = {
-    rowNumber: number
-    startDate: string
-    endDate: string
-    restTime: string
-    resultTime: string
-};
-export type WorkScheduleArray = Array<WorkSchedule>;
+export type WorkScheduleArray = Array<WorkScheduleType>;
 
 export type WorkScheduleState = {
     workSchedule: WorkScheduleArray
 }
 
-export type UpdateWorkSchedulePayload = WorkSchedule
-export type AddWorkSchedulePayload = WorkSchedule
+export type UpdateWorkSchedulePayload = WorkScheduleType
+export type AddWorkSchedulePayload = WorkScheduleType
 
 const getYoctoTime = (_d:Date) => {
     return new Date(_d.getFullYear(), _d.getMonth(), _d.getDate(), 0, 0, 0);

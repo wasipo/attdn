@@ -9,16 +9,36 @@ export const KeyName = {
     'rest': 'rest',
     'result': 'result',
     'addFc': 'addFc',
+    'complete': 'complete',
     'scheduleParent': 'scheduleParent'
 }
 
+export type WorkScheduleType = {
+    rowNumber: number
+    startDate: string
+    endDate: string
+    restTime: string
+    resultTime: string
+};
 
-export const WorkSchedules = (row:number) => {
+
+export type WorkScheduleRows = {
+    WorkScheduleRow: {
+        rowNumber: number
+        startDate: string
+        endDate: string
+        restTime: string
+        resultTime: string
+    }
+};
+
+export const WorkSchedules = (row:number):WorkScheduleType => {
     return {
         'rowNumber' : row,
         'startDate' : '00:00',
         'endDate' : '00:00',
         'restTime' : '00:00',
+        'resultTime': '00:00'
     }
 }
 
