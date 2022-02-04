@@ -8,7 +8,7 @@ const WorkScheduleLayout = () => {
   const dispatch = useDispatch();
   const workScheduleRow = useSelector((state:workScheduleRowState) => state.workScheduleRow);
 
-  const handleInsert = (row:number) => {
+  const handleInsert = (row: number) => {
     dispatch(
         WorkScheduleRow.actions.addWorkSchedule({
             rowNumber: row,

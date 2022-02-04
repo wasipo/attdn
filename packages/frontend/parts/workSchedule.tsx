@@ -4,34 +4,74 @@ import {ClockingOut,Attendance,ResultTodayAttendance,RestTime} from './Attendanc
 import {AddFunction,CompleteButton} from './AttendanceFunction';
 import {Span} from './style/span';
 import {Modal} from '../layouts/Modal'
-import {WorkSchedules,KeyName} from '../lib/data/WorkSchedule';
+import {WorkSchedules, KeyName, WorkScheduleRows, WorkScheduleType} from '../lib/data/WorkSchedule';
 import startOfWeekYear from 'date-fns/esm/startOfWeekYear/index.js';
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, useFieldArray, useWatch, Control } from "react-hook-form";
+import {WorkScheduleRow} from "../lib/store/WorkSchedule";
 
 
-type Inputs = {
-    example: string,
-    exampleRequired: string,
-  };
+
+type w = {
+    WorkScheduleRow: {
+        rowNumber: number
+        startDate: string
+        endDate: string
+        restTime: string
+        resultTime: string
+    }[]
+};
 
 const WorkSchedule = () => {
-
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
-
-    
-    type WeekUnion = typeof week[number];
-    const week = ['日','月','火','水','木','金','土'] as const;
-
-    const [isShow,setShowModal] = useState<boolean>(false);
-    const [targetRow,setRow] = useState<number>(0);
-    const cancelButtonRef = useRef(null);
 
     const date = new Date();
 
     const getEndDate = (date: Date):number =>  {
         return Number(format(new Date(date.getFullYear(),date.getMonth()+1,0), 'dd'))+1;
     }
+    const createField = ():any => {
+        let result = [];
+        for (let i = 0; i < getEndDate(date)-1; i++)
+        {
+            result[i] = WorkSchedules(i+1);
+        }
+
+        return result;
+    };
+
+    const {
+        register,
+        control,
+        getValues,
+        handleSubmit,
+        watch,
+        formState: { isValid }
+    } = useForm<w>({
+        defaultValues: {
+            WorkScheduleRow: createField()
+        },
+        mode: "onBlur"
+    });
+
+
+    const { fields, append, remove } = useFieldArray({
+        name: "WorkScheduleRow",
+        control
+    });
+    const watchFieldArray = watch("WorkScheduleRow");
+
+    const controlledFields = fields.map((field, index) => {
+        return {
+            ...field,
+            ...watchFieldArray[index]
+        };
+    });
+
+    type WeekUnion = typeof week[number];
+    const week = ['日','月','火','水','木','金','土'] as const;
+
+    const [isShow,setShowModal] = useState<boolean>(false);
+    const [targetRow,setRow] = useState<number>(0);
+    const cancelButtonRef = useRef(null);
 
     const getToday = (): String => {
        return format(new Date(), 'yyyy/MM/dd');
@@ -69,28 +109,22 @@ const WorkSchedule = () => {
 
     return (
         <>
-        {(() => {
-            let parent:Array<JSX.Element> = [];
-            let items:Array<JSX.Element> = [];
-            for (let i = 1; i < getEndDate(date); i++) 
             {
-                // handleInsert(i+1);
-                // console.log('cc',workScheduleRow);
-                let rowData:Array<Object> = [WorkSchedules(i)];
-                items.push(<td key={KeyName.day+rowData[i]} className="px-6 py-4 whitespace-nowrap">{i}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>)
-                items.push(<td key={KeyName.attendance+rowData[i]} className="px-6 py-4 whitespace-nowrap"><Attendance key={'at'+i} rowNumber={i} /></td>)
-                items.push(<td key={KeyName.leave+rowData[i]} className="px-6 py-4 whitespace-nowrap"><ClockingOut key={'cl'+i} rowNumber={i} /></td>)
-                items.push(<td key={KeyName.rest+rowData[i]} className="px-6 py-4 whitespace-nowrap"><RestTime key={'re'+i} rowNumber={i} /></td>)
-                items.push(<td key={KeyName.result+rowData[i]} className="px-6 py-4 whitespace-nowrap"><ResultTodayAttendance key={'res'+i} rowNumber={i} /></td>)
-                items.push(<td key={KeyName.addFc+rowData[i]} className="px-6 py-4 whitespace-nowrap"><AddFunction key={'ad'+i} modalControl={modalControl} getClickRow={getClickRow} rowNumber={i} /></td>)
-                items.push(<td key={KeyName.addFc+rowData[i]} className="px-6 py-4 whitespace-nowrap"><CompleteButton key={'ad'+i} modalControl={modalControl} getClickRow={getClickRow} rowNumber={i} /></td>)
-                parent.push(<tr key={'key'+i}>
-                    {items}
-                </tr>);
-                items = [];
+                controlledFields.map((field, i:number) =>
+                {
+                    return (
+                        <tr key={field.id}>
+                            <td key={KeyName.day+i} className="px-6 py-4 whitespace-nowrap">{watchFieldArray[i].rowNumber}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>
+                            <td key={KeyName.attendance+i} className="px-6 py-4 whitespace-nowrap"><Attendance key={'at'+i} rowNumber={i} /></td>
+                            <td key={KeyName.leave+i} className="px-6 py-4 whitespace-nowrap"><ClockingOut key={'cl'+i} rowNumber={i} /></td>
+                            <td key={KeyName.rest+i} className="px-6 py-4 whitespace-nowrap"><RestTime key={'re'+i} rowNumber={i} /></td>
+                            <td key={KeyName.result+i} className="px-6 py-4 whitespace-nowrap"><ResultTodayAttendance key={'res'+i} rowNumber={i} /></td>
+                            <td key={KeyName.addFc+i} className="px-6 py-4 whitespace-nowrap"><AddFunction key={'ad'+i} modalControl={modalControl} getClickRow={getClickRow} rowNumber={i} /></td>
+                            <td key={KeyName.complete+i} className="px-6 py-4 whitespace-nowrap"><CompleteButton key={'co'+i} modalControl={modalControl} getClickRow={getClickRow} rowNumber={i} /></td>
+                        </tr>
+                    );
+                })
             }
-            return parent;
-        })()}
         <Modal isShow={isShow} targetRow={targetRow} modalContol={modalControl} cancelButtonRef={cancelButtonRef} />
         </>
     )

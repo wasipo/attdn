@@ -1,6 +1,6 @@
 
 type workSchedule = {
-    rowNumber : number
+    rowNumber : number,
 }
 
 export const Attendance = (props:workSchedule) => {
