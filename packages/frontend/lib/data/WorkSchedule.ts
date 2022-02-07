@@ -29,7 +29,7 @@ export type WorkScheduleRows = {
         endDate: string
         restTime: string
         resultTime: string
-    }
+    }[]
 };
 
 export const WorkSchedules = (row:number):WorkScheduleType => {
