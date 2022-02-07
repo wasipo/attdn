@@ -42,6 +42,10 @@ const WorkSchedule = () => {
         mode: "onBlur"
     });
 
+    // const formValues = useWatch({
+    //     name: "WorkScheduleRow",
+    //     control
+    // });
 
     const { fields, append, remove } = useFieldArray({
         name: "WorkScheduleRow",
@@ -114,7 +118,7 @@ const WorkSchedule = () => {
                             <td key={KeyName.rest+i} className="px-6 py-4 whitespace-nowrap"><RestTime register={register} key={'re'+i} rowNumber={i} inputName={name[2]} /></td>
                             <td key={KeyName.result+i} className="px-6 py-4 whitespace-nowrap"><ResultTodayAttendance register={register} key={'res'+i} rowNumber={i} inputName={name[3]} /></td>
                             <td key={KeyName.addFc+i} className="px-6 py-4 whitespace-nowrap"><AddFunction key={'ad'+i} modalControl={modalControl} getClickRow={getClickRow} rowNumber={i} /></td>
-                            <td key={KeyName.complete+i} className="px-6 py-4 whitespace-nowrap"><CompleteButton key={'co'+i} setValue={setValue} getValues={getValues} rowNumber={i} formName={name} /></td>
+                            <td key={KeyName.complete+i} className="px-6 py-4 whitespace-nowrap"><CompleteButton key={'co'+i} useWatch={useWatch} watchFieldArray={watchFieldArray} control={control} setValue={setValue} getValues={getValues} rowNumber={i} formName={name} /></td>
                         </tr>
                     );
                 })

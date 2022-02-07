@@ -1,4 +1,6 @@
 import React from 'react'
+import { useForm, useWatch, Control } from "react-hook-form";
+
 
 type WorkScheduleProps = {
     modalControl:Function,
@@ -24,17 +26,32 @@ type CompleteButton = {
     setValue:Function,
     getValues:Function,
     formName: string[],
+    watchFieldArray: { rowNumber: number; startDate: string; endDate: string; restTime: string; resultTime: string; }[],
+    control:any
+    useWatch:Function
 }
 
 export const CompleteButton = (props:CompleteButton) => {
 
     const setFormValue = (name:string[]) => {
         const formValue = props.getValues(name);
+        console.log(props.watchFieldArray);
         alert(JSON.stringify(props.formName))
         alert(JSON.stringify(formValue));
     }
 
+
+    const watchTest = ({control}: { control: Control<any> }) => {
+        const f = props.useWatch({
+            control,
+            name: "WorkScheduleRow",
+            defaultValue: "default"
+        })
+        console.log(props.watchFieldArray);
+    }
+
+
     return (
-        <button type="button" onClick={() => {setFormValue(props.formName)}} className='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>入力完了</button>
+        <button type="button" onClick={() => {watchTest(props.control)}} className='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>入力完了</button>
     );
 }
