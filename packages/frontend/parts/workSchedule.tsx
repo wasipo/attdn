@@ -1,13 +1,14 @@
 import React,{useRef, useState} from 'react';
 import { format } from 'date-fns';
 import {ClockingOut,Attendance,ResultTodayAttendance,RestTime} from './Attendance';
-import {AddFunction,CompleteButton} from './AttendanceFunction';
 import {Span} from './style/span';
 import {Modal} from '../layouts/Modal'
 import {WorkSchedules, KeyName, WorkScheduleRows, WorkScheduleType} from '../lib/data/WorkSchedule';
 import startOfWeekYear from 'date-fns/esm/startOfWeekYear/index.js';
 import { useForm, useFieldArray, useWatch, Control } from "react-hook-form";
 import {WorkScheduleRow} from "../lib/store/WorkSchedule";
+// @ts-ignore
+import {AddFunction,CompleteButton} from './AttendanceFunction';
 
 
 const WorkSchedule = () => {
@@ -39,7 +40,7 @@ const WorkSchedule = () => {
         defaultValues: {
             WorkScheduleRow: createField()
         },
-        mode: "onBlur"
+        mode: "onChange"
     });
 
     // const formValues = useWatch({
@@ -109,7 +110,7 @@ const WorkSchedule = () => {
             {
                 controlledFields.map((field, i:number) =>
                 {
-                    let name = ['attendance'+i,'clockingOut'+i,'restTime'+i,'resultTodayAttendance'+i];
+                    let name = ['startDate'+i,'endDate'+i,'restTime'+i,'resultTime'+i];
                     return (
                         <tr key={field.id}>
                             <td key={KeyName.day+i} className="px-6 py-4 whitespace-nowrap">{watchFieldArray[i].rowNumber}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>
