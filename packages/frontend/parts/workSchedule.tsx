@@ -9,6 +9,10 @@ import { useForm, useFieldArray, useWatch, Control } from "react-hook-form";
 import {WorkScheduleRow} from "../lib/store/WorkSchedule";
 // @ts-ignore
 import {AddFunction,CompleteButton} from './AttendanceFunction';
+import {start} from "repl";
+
+
+
 
 
 const WorkSchedule = () => {
@@ -38,28 +42,29 @@ const WorkSchedule = () => {
         formState: { isValid }
     } = useForm<WorkScheduleRows>({
         defaultValues: {
-            WorkScheduleRow: createField()
+            WorkScheduleRow:  createField()
         },
-        mode: "onChange"
+        mode: "onBlur"
     });
-
-    // const formValues = useWatch({
-    //     name: "WorkScheduleRow",
-    //     control
-    // });
 
     const { fields, append, remove } = useFieldArray({
         name: "WorkScheduleRow",
         control
     });
-    const watchFieldArray = watch("WorkScheduleRow");
 
+
+    const watchFieldArray = watch("WorkScheduleRow");
     const controlledFields = fields.map((field, index) => {
+        console.log(watchFieldArray);
+
         return {
             ...field,
             ...watchFieldArray[index]
         };
     });
+
+    console.log(watchFieldArray);
+
 
     type WeekUnion = typeof week[number];
     const week = ['日','月','火','水','木','金','土'] as const;
@@ -110,10 +115,9 @@ const WorkSchedule = () => {
             {
                 controlledFields.map((field, i:number) =>
                 {
-                    let name = ['startDate'+i,'endDate'+i,'restTime'+i,'resultTime'+i];
+                    let name = ['startDate','endDate','restTime','resultTime'];
                     return (
                         <tr key={field.id}>
-                            <td key={KeyName.day+i} className="px-6 py-4 whitespace-nowrap">{watchFieldArray[i].rowNumber}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>
                             <td key={KeyName.attendance+i} className="px-6 py-4 whitespace-nowrap"><Attendance register={register} key={'at'+i} rowNumber={i} inputName={name[0]} /></td>
                             <td key={KeyName.leave+i} className="px-6 py-4 whitespace-nowrap"><ClockingOut register={register} key={'cl'+i} rowNumber={i} inputName={name[1]} /></td>
                             <td key={KeyName.rest+i} className="px-6 py-4 whitespace-nowrap"><RestTime register={register} key={'re'+i} rowNumber={i} inputName={name[2]} /></td>
@@ -124,7 +128,7 @@ const WorkSchedule = () => {
                     );
                 })
             }
-        <Modal isShow={isShow} targetRow={targetRow} modalContol={modalControl} cancelButtonRef={cancelButtonRef} />
+            <Modal isShow={isShow} targetRow={targetRow} modalContol={modalControl} cancelButtonRef={cancelButtonRef} />
         </>
     )
 }

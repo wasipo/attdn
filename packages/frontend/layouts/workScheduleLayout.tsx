@@ -19,7 +19,6 @@ const WorkScheduleLayout = () => {
             resultTime: '00:00'   
         })
       )
-      console.log(workScheduleRow);
   }
   const handleReset = () => {
       dispatch(WorkScheduleRow.actions.reset());
