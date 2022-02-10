@@ -7,9 +7,7 @@ import {WorkSchedules, KeyName, WorkScheduleRows, WorkScheduleType} from '../lib
 import startOfWeekYear from 'date-fns/esm/startOfWeekYear/index.js';
 import { useForm, useFieldArray, useWatch, Control } from "react-hook-form";
 import {WorkScheduleRow} from "../lib/store/WorkSchedule";
-// @ts-ignore
 import {AddFunction,CompleteButton} from './AttendanceFunction';
-import {start} from "repl";
 
 
 
