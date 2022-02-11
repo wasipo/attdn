@@ -50,19 +50,13 @@ const WorkSchedule = () => {
         control
     });
 
-
     const watchFieldArray = watch("WorkScheduleRow");
     const controlledFields = fields.map((field, index) => {
-        console.log(watchFieldArray);
-
         return {
             ...field,
             ...watchFieldArray[index]
         };
     });
-
-    console.log(watchFieldArray);
-
 
     type WeekUnion = typeof week[number];
     const week = ['日','月','火','水','木','金','土'] as const;
