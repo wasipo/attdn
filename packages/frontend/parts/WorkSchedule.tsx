@@ -8,10 +8,34 @@ import startOfWeekYear from 'date-fns/esm/startOfWeekYear/index.js';
 import { useForm, useFieldArray, useWatch, Control } from "react-hook-form";
 import {WorkScheduleRow} from "../lib/store/WorkSchedule";
 import {AddFunction,CompleteButton} from './AttendanceFunction';
+import {JSXElement} from "@typescript-eslint/types/dist/ast-spec";
 
 
 
+const ResultAttendanceTime = ({control}:{control: Control<WorkScheduleRows>}) => {
 
+    const formValues = useWatch({
+        name: "WorkScheduleRow",
+        control
+    });
+
+    const time = formValues.reduce(
+        (prev,{resultTime}) => {
+            const [hr,mr] = resultTime.split(':');
+            const h:number = ((Number(hr)*60)*60);
+            const m:number = (Number(mr)*60);
+            return prev+(h+m)
+        },0
+    );
+
+    const total = ('00'+String(Math.floor(time/3600))).slice(-2)+':'+('00'+String(time % 3600/60|0)).slice(-2);
+
+    return (
+        <div>
+            {total}
+        </div>
+    )
+}
 
 const WorkSchedule = () => {
 
@@ -110,6 +134,7 @@ const WorkSchedule = () => {
                     let name = ['startDate','endDate','restTime','resultTime'];
                     return (
                         <tr key={field.id}>
+                            <td key={KeyName.day+i} className="px-6 py-4 whitespace-nowrap">{watchFieldArray[i].rowNumber}{setDayOfWeekColor(getDayOfWeek(i),i)}</td>
                             <td key={KeyName.attendance+i} className="px-6 py-4 whitespace-nowrap"><Attendance register={register} key={'at'+i} rowNumber={i} inputName={name[0]} /></td>
                             <td key={KeyName.leave+i} className="px-6 py-4 whitespace-nowrap"><ClockingOut register={register} key={'cl'+i} rowNumber={i} inputName={name[1]} /></td>
                             <td key={KeyName.rest+i} className="px-6 py-4 whitespace-nowrap"><RestTime register={register} key={'re'+i} rowNumber={i} inputName={name[2]} /></td>
@@ -121,6 +146,7 @@ const WorkSchedule = () => {
                 })
             }
             <Modal isShow={isShow} targetRow={targetRow} modalContol={modalControl} cancelButtonRef={cancelButtonRef} />
+            <ResultAttendanceTime control={control} />
         </>
     )
 }

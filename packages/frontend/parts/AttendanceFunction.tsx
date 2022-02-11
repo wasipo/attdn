@@ -26,7 +26,7 @@ type CompleteButton = {
     setValue:Function,
     getValues:Function,
     formName: string[],
-    watchFieldArray: { rowNumber: number; startDate: string; endDate: string; restTime: string; resultTime: string; }[],
+    watchFieldArray: { rowNumber: number; startDate: string; endDate: string; restTime: string; }[],
     control:any
     useWatch:Function
 }
