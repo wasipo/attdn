@@ -36,6 +36,10 @@ const WorkSchedule = () => {
 
     const date = new Date();
 
+    /**
+     * 　Modalからのデータを保存しておく変数が必要、本日の合計時間を計算するために
+     **/
+
     const getEndDate = (date: Date):number =>  {
         return Number(format(new Date(date.getFullYear(),date.getMonth()+1,0), 'dd'))+1;
     }
