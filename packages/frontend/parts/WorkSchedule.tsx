@@ -4,32 +4,27 @@ import {ClockingOut,Attendance,ResultTodayAttendance,RestTime} from './Attendanc
 import {Span} from './style/span';
 import {Modal} from '../layouts/Modal'
 import {WorkSchedules, KeyName, WorkScheduleRows, WorkScheduleType} from '../lib/data/WorkSchedule';
-import startOfWeekYear from 'date-fns/esm/startOfWeekYear/index.js';
 import { useForm, useFieldArray, useWatch, Control } from "react-hook-form";
 import {WorkScheduleRow} from "../lib/store/WorkSchedule";
 import {AddFunction,CompleteButton} from './AttendanceFunction';
-import {JSXElement} from "@typescript-eslint/types/dist/ast-spec";
-
+import {CalcTimeHour, CalcTimeMinutes,CalcTimeFormat} from "../lib/CalcTime";
+import {WeekUnion,week,getDayOfWeek} from "../lib/Week";
 
 
 const ResultAttendanceTime = ({control}:{control: Control<WorkScheduleRows>}) => {
-
     const formValues = useWatch({
         name: "WorkScheduleRow",
         control
     });
-
     const time = formValues.reduce(
         (prev,{resultTime}) => {
             const [hr,mr] = resultTime.split(':');
-            const h:number = ((Number(hr)*60)*60);
-            const m:number = (Number(mr)*60);
-            return prev+(h+m)
+            const h:CalcTimeHour = new CalcTimeHour(Number(hr));
+            const m:CalcTimeMinutes = new CalcTimeMinutes(Number(mr));
+            return prev+(h.calcTimeHour()+m.calcTimeMinutes())
         },0
     );
-
-    const total = ('00'+String(Math.floor(time/3600))).slice(-2)+':'+('00'+String(time % 3600/60|0)).slice(-2);
-
+    const total = CalcTimeFormat(time);
     return (
         <div>
             {total}
@@ -82,8 +77,6 @@ const WorkSchedule = () => {
         };
     });
 
-    type WeekUnion = typeof week[number];
-    const week = ['日','月','火','水','木','金','土'] as const;
 
     const [isShow,setShowModal] = useState<boolean>(false);
     const [targetRow,setRow] = useState<number>(0);
@@ -93,15 +86,8 @@ const WorkSchedule = () => {
        return format(new Date(), 'yyyy/MM/dd');
     }
 
-    const getUUID = (): string => {
-        const strong = 1000;
-        return new Date().getTime().toString(16)  + Math.floor(strong*Math.random()).toString(16)
-    }
-    const getDayOfWeek = (day:number):WeekUnion => week[(new Date((new Date()).setDate(day))).getDay()];
-
-
     const setDayOfWeekColor = (dayOfWeek: WeekUnion,i:number):JSX.Element => {
- 
+
         let result:JSX.Element;
         let saturday:string = week[week.length-1];
         let sunday:string = week[0];
