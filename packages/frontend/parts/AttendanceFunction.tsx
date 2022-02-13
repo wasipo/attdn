@@ -23,10 +23,7 @@ export const AddFunction = (props:WorkScheduleProps) => {
 
 type CompleteButton = {
     rowNumber: number,
-    setValue:Function,
-    getValues:Function,
     formName: string[],
-    watchFieldArray: { rowNumber: number; startDate: string; endDate: string; restTime: string; }[],
     control:any
     useWatch:Function
 }
@@ -42,7 +39,7 @@ export const CompleteButton = (props:CompleteButton) => {
 
 
     const watchTest = () => {
-        console.log(props.watchFieldArray);
+        // console.log(props.watchFieldArray);
     }
 
 
