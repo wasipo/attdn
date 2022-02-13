@@ -48,9 +48,8 @@ export type workScheduleRowState = ReturnType<typeof rootReducer>
 
 export const setupStore = () => {
     const middlewares = [...getDefaultMiddleware()];
-    const store = configureStore({
+    return configureStore({
         reducer: rootReducer,
         middleware: middlewares,
     });
-    return store;
 }
