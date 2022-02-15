@@ -33,17 +33,17 @@ const ResultAttendanceTime = ({control}:{control: Control<WorkScheduleRows>}) =>
     )
 }
 
-type parentSchedule = {
-    controlledFields: {
-        rowNumber: number
-        startDate: string
-        endDate: string
-        restTime: string
-        resultTime: string
-    }[]
-    control: any
-    register:any
-}
+    type parentSchedule = {
+        controlledFields: {
+            rowNumber: number
+            startDate: string
+            endDate: string
+            restTime: string
+            resultTime: string
+        }[]
+        control: any
+        register:any
+    }
 
 
 const WorkSchedule = (props:parentSchedule) => {

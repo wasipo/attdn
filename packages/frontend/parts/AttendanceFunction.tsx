@@ -30,20 +30,7 @@ type CompleteButton = {
 
 export const CompleteButton = (props:CompleteButton) => {
 
-    // const setFormValue = (name:string[]) => {
-    //     const formValue = props.getValues(name);
-    //     console.log(props.watchFieldArray);
-    //     alert(JSON.stringify(props.formName))
-    //     alert(JSON.stringify(formValue));
-    // }
-
-
-    const watchTest = () => {
-        // console.log(props.watchFieldArray);
-    }
-
-
     return (
-        <button type="button" onClick={() => {watchTest()}} className='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>入力完了</button>
+        <button type="button" className='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>入力完了</button>
     );
 }
