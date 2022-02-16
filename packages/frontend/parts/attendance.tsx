@@ -6,17 +6,6 @@ type workSchedule = {
     inputName: string
 }
 
-type workScheduleResult = {
-    rowNumber : number,
-    register: Function,
-    inputName: string,
-}
-
-type attendance = {
-    rowNumber : number,
-    register: Function
-}
-
 interface formType {
     required: boolean,
     valueAsNumber: boolean,
@@ -71,16 +60,13 @@ export const RestTime = (props:workSchedule) => {
     )
 }
 
-export const ResultTodayAttendance = (props:workScheduleResult) => {
+export const ResultTodayAttendance = (props:workSchedule) => {
 
     const partsAttr:formType = {
         required: true,
         valueAsNumber: false,
         valueAsString:  true,
     }
-
-
-
 
     return (
         <input name={props.inputName} type="text"
