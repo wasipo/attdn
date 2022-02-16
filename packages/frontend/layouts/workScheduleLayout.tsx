@@ -6,7 +6,7 @@ import {getEndDate} from "../lib/CalcDate";
 
 const WorkScheduleLayout = () => {
 
-    const [rowData,setData] = useState([])
+    const [rowData,setData] = useState(false)
     const workResults:Array<string> = [];
 
     const date = new Date();
@@ -22,13 +22,9 @@ const WorkScheduleLayout = () => {
 
     const submit = (data: WorkScheduleRows) => {
         localStorage.setItem('form', JSON.stringify(data))
-        reset()
+        const localFormData = localStorage.getItem('form') as string;
+        reset(JSON.parse(localFormData))
     }
-
-    useEffect(() => {
-        const localData = JSON.parse(localStorage.getItem('form') as string);
-        setData(localData.WorkScheduleRow);
-    }, [])
 
     const {
         register,
@@ -46,6 +42,15 @@ const WorkScheduleLayout = () => {
         mode: "onBlur"
     });
 
+    useEffect(() => {
+        const localFormData = localStorage.getItem('form') as string;
+        if(localFormData) {
+            setData(true);
+            reset(JSON.parse(localFormData));
+        }
+    }, [setData,reset])
+
+
     const { fields, append, remove } = useFieldArray({
         name: "WorkScheduleRow",
         control
@@ -58,7 +63,6 @@ const WorkScheduleLayout = () => {
             ...watchFieldArray[index]
         };
     });
-
 
 
     return (
