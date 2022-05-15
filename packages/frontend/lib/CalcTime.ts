@@ -13,6 +13,15 @@ export class CalcTimeHour {
 
 }
 
+
+export const getRawTime = (time: string) => {
+    const [hr,mr] = time.split(':');
+    const h:CalcTimeHour = new CalcTimeHour(Number(hr));
+    const m:CalcTimeMinutes = new CalcTimeMinutes(Number(mr));
+    return (h.calcTimeHour()+m.calcTimeMinutes())
+}
+
+
 export class CalcTimeMinutes {
 
     private readonly minutes:number;

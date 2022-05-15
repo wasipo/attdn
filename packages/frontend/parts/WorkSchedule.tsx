@@ -6,10 +6,9 @@ import {Modal} from '../layouts/Modal'
 import {WorkSchedules, KeyName, WorkScheduleRows, WorkScheduleType} from '../lib/data/WorkSchedule';
 import {WorkScheduleArray, WorkScheduleRow} from "../lib/store/WorkSchedule";
 import {AddFunction,CompleteButton} from './AttendanceFunction';
-import {CalcTimeHour, CalcTimeMinutes,CalcTimeFormat} from "../lib/CalcTime";
+import {CalcTimeHour, CalcTimeMinutes, CalcTimeFormat, getRawTime} from "../lib/CalcTime";
 import {WeekUnion,week,getDayOfWeek} from "../lib/Week";
-import {Control,useWatch } from "react-hook-form";
-
+import {Control, useWatch} from "react-hook-form";
 
 
 const ResultAttendanceTime = ({control}:{control: Control<WorkScheduleRows>}) => {
@@ -17,6 +16,17 @@ const ResultAttendanceTime = ({control}:{control: Control<WorkScheduleRows>}) =>
         name: "WorkScheduleRow",
         control
     });
+
+    formValues.map(({startDate,endDate,restTime,resultTime}) => {
+        const start = getRawTime(startDate);
+        const end = getRawTime(endDate);
+        const rest = getRawTime(restTime);
+
+        console.log(startDate,endDate,restTime)
+        console.log(start,end,rest);
+
+    })
+
     const time = formValues.reduce(
         (prev,{resultTime}) => {
             const [hr,mr] = resultTime.split(':');
@@ -50,7 +60,7 @@ const WorkSchedule = (props:parentSchedule) => {
 
 
     /**
-     * 　Modalからのデータを保存しておく変数が必要、本日の合計時間を計算するために
+     * Modalからのデータを保存しておく変数が必要、本日の合計時間を計算するために
      **/
 
 
