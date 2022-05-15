@@ -13,6 +13,15 @@ export class CalcTimeHour {
 
 }
 
+export const getWorkTime = (startDate: string,endDate: string,restTime: string) => {
+    const [startHr,startMn] = startDate.split(':');
+    const [endHr,endMn] = endDate.split(':');
+    const [restHr,restMn] = restTime.split(':');
+    const hr = (Number(endHr) - Number(startHr)) - Number(restHr);
+    const mn = (Number(endMn) - Number(startMn)) - Number(restMn);
+
+    return String(('00'+hr).slice(-2))+':'+String(('00'+(mn)).slice(-2));
+};
 
 export const getRawTime = (time: string) => {
     const [hr,mr] = time.split(':');
