@@ -17,3 +17,14 @@ export const EndOverTime = () => {
         </div>
     )
 };
+
+
+
+export const TotalOverTime = () => {
+    return (
+        <div className="mt-3 block">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="totalOverTime">合計残業時間</label>
+            <input readOnly name="totalOverTime" type="text" className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md border" />
+        </div>
+    )
+};

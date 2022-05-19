@@ -32,6 +32,20 @@ export type WorkScheduleRows = {
     }[]
 };
 
+export type OverTimes = {
+        overTimes: {
+            totalOverTime: number
+            overTimes: [
+                {
+                    startOverTime: number
+                    endOverTime: string
+                }
+            ]
+        }
+};
+
+
+
 export const WorkSchedules = (row:number):WorkScheduleType => {
     return {
         'rowNumber' : row,
@@ -42,11 +56,11 @@ export const WorkSchedules = (row:number):WorkScheduleType => {
     }
 }
 
-export const OverTimes = (row:number) => {
-    return {
-        'rowNumber' : row,
-        'startDate' : '00:00',
-        'endDate' : '00:00',
-        'arrow' : created,
-    }
-}
+// export const OverTimes = (row:number) => {
+//     return {
+//         'rowNumber' : row,
+//         'startOverTime' : '00:00',
+//         'endOverTime' : '00:00',
+//         'arrow' : created,
+//     }
+// }
