@@ -86,20 +86,23 @@ const WorkSchedule = (props: parentSchedule) => {
 
   const modalControl = (isState: boolean) => setShowModal(isState)
   const getClickRow = (rowNumber: number) => setRow(rowNumber)
+  const getMonth = ():string => String((new Date().getMonth()+1));
 
   return (
     <>
       {
         controlledFields.map((field, i: number) => {
-          let name = ['startDate', 'endDate', 'restTime', 'resultTime'];
+          const name: Array<string> = ['startDate', 'endDate', 'restTime', 'resultTime'];
 
+          // https://qiita.com/FumioNonaka/items/943909dee793ee63416b
+          // 子コンポーネント化したフォームからSubmitキック
           return (
             <tr key={'tr' + i}>
               <td key={KeyName.day + i} className="px-6 py-4 whitespace-nowrap">
-                {field.rowNumber}{setDayOfWeekColor(getDayOfWeek(i), i)}
+                {getMonth()+'/'+field.rowNumber}{setDayOfWeekColor(getDayOfWeek(i), i)}
               </td>
               <td key={KeyName.attendance + i} className="px-6 py-4 whitespace-nowrap">
-                <Attendance register={register} key={'at' + i} rowNumber={i} inputName={name[0]}/>
+                <Attendance register={register} key={'at' + i} rowNumber={i} inputName={name[0]} />
               </td>
               <td key={KeyName.leave + i} className="px-6 py-4 whitespace-nowrap">
                 <ClockingOut register={register} key={'cl' + i} rowNumber={i} inputName={name[1]}/>
@@ -119,7 +122,7 @@ const WorkSchedule = (props: parentSchedule) => {
         })
       }
       <Modal isShow={isShow} targetRow={targetRow} modalContol={modalControl} cancelButtonRef={cancelButtonRef}/>
-      <ResultAttendanceTime control={control}/>
+      {/*<ResultAttendanceTime control={control}/>*/}
     </>
   )
 }

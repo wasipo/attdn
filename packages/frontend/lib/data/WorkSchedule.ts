@@ -23,6 +23,9 @@ export type WorkScheduleType = {
 
 
 export type WorkScheduleRows = {
+    year: number,
+    month: number,
+    day: number,
     WorkScheduleRow: {
         rowNumber: number
         startDate: string
