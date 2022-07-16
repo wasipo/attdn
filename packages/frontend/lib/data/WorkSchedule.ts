@@ -23,16 +23,8 @@ export type WorkScheduleType = {
 
 
 export type WorkScheduleRows = {
-    year: number,
-    month: number,
-    day: number,
-    WorkScheduleRow: {
-        rowNumber: number
-        startDate: string
-        endDate: string
-        restTime: string
-        resultTime: string
-    }[]
+    // YearMonth: any,
+    WorkScheduleRow: WorkScheduleType[]
 };
 
 export type OverTimes = {
