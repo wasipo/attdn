@@ -86,7 +86,7 @@ const WorkSchedule = (props: parentSchedule) => {
 
   const modalControl = (isState: boolean) => setShowModal(isState)
   const getClickRow = (rowNumber: number) => setRow(rowNumber)
-  const getMonth = ():string => String((new Date().getMonth()+1));
+  const getMonth = (): string => String((new Date().getMonth() + 1));
 
   return (
     <>
@@ -94,15 +94,14 @@ const WorkSchedule = (props: parentSchedule) => {
         controlledFields.map((field, i: number) => {
           const name: Array<string> = ['startDate', 'endDate', 'restTime', 'resultTime'];
 
-          // https://qiita.com/FumioNonaka/items/943909dee793ee63416b
           // 子コンポーネント化したフォームからSubmitキック
           return (
             <tr key={'tr' + i}>
               <td key={KeyName.day + i} className="px-6 py-4 whitespace-nowrap">
-                {getMonth()+'/'+field.rowNumber}{setDayOfWeekColor(getDayOfWeek(i), i)}
+                {getMonth() + '/' + field.rowNumber}{setDayOfWeekColor(getDayOfWeek(i), i)}
               </td>
               <td key={KeyName.attendance + i} className="px-6 py-4 whitespace-nowrap">
-                <Attendance register={register} key={'at' + i} rowNumber={i} inputName={name[0]} />
+                <Attendance register={register} key={'at' + i} rowNumber={i} inputName={name[0]}/>
               </td>
               <td key={KeyName.leave + i} className="px-6 py-4 whitespace-nowrap">
                 <ClockingOut register={register} key={'cl' + i} rowNumber={i} inputName={name[1]}/>
@@ -111,7 +110,10 @@ const WorkSchedule = (props: parentSchedule) => {
                 <RestTime register={register} key={'re' + i} rowNumber={i} inputName={name[2]}/>
               </td>
               <td key={KeyName.result + i} className="px-6 py-4 whitespace-nowrap">
-                <ResultTodayAttendance register={register} key={'res' + i} rowNumber={i} inputName={name[3]}
+                <ResultTodayAttendance register={register}
+                                       key={'res' + i}
+                                       rowNumber={i}
+                                       inputName={name[3]}
                                        workTime={getWorkTime(field.startDate, field.endDate, field.restTime)}/>
               </td>
               <td key={KeyName.addFc + i} className="px-6 py-4 whitespace-nowrap">

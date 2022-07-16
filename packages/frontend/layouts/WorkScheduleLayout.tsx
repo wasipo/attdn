@@ -1,8 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import WorkSchedule from '../parts/WorkSchedule';
 import {WorkScheduleRows, WorkSchedules} from "../lib/data/WorkSchedule";
-import { useForm, useFieldArray, useWatch, Control } from "react-hook-form";
+import {useForm, useFieldArray, useWatch, Control, SubmitHandler} from "react-hook-form";
 import {getEndDate} from "../lib/CalcDate";
+import {Simulate} from "react-dom/test-utils";
+
+
+
+
 
 const WorkScheduleLayout = () => {
 
@@ -19,12 +24,6 @@ const WorkScheduleLayout = () => {
         }
         return result;
     };
-
-    const submit = (data: WorkScheduleRows) => {
-        localStorage.setItem('form', JSON.stringify(data))
-        const localFormData = localStorage.getItem('form') as string;
-        reset(JSON.parse(localFormData))
-    }
 
     const {
         register,
@@ -65,18 +64,23 @@ const WorkScheduleLayout = () => {
         };
     });
 
+    const onSubmit: SubmitHandler<WorkScheduleRows> = (data: WorkScheduleRows) => {
+        localStorage.setItem('form', JSON.stringify(data))
+        const localFormData = localStorage.getItem('form') as string;
+        reset(JSON.parse(localFormData))
+    }
 
     return (
-        <form onSubmit={handleSubmit(submit)}>
-            <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-400">対象月を選択してください</label>
-            <select id="countries"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option selected value="7">7月</option>
-                <option value="6">6月</option>
-                <option value="5">5月</option>
-                <option value="4">4月</option>
-                <option value="3">3月</option>
-            </select>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            {/*<label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-400">対象月を選択してください</label>*/}
+            {/*<select id="countries"*/}
+            {/*        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">*/}
+            {/*    <option selected value="7">7月</option>*/}
+            {/*    <option value="6">6月</option>*/}
+            {/*    <option value="5">5月</option>*/}
+            {/*    <option value="4">4月</option>*/}
+            {/*    <option value="3">3月</option>*/}
+            {/*</select>*/}
             <button>保存</button>
             <div className="flex flex-col">
                 <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
