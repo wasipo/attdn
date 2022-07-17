@@ -9,6 +9,7 @@ import {AddFunction, CompleteButton} from './AttendanceFunction';
 import {CalcTimeHour, CalcTimeMinutes, CalcTimeFormat, getWorkTime} from "../lib/CalcTime";
 import {WeekUnion, week, getDayOfWeek} from "../lib/Week";
 import {Control, useWatch} from "react-hook-form";
+import {getMonth} from "../lib/CalcDate";
 
 
 const ResultAttendanceTime = ({control}: { control: Control<WorkScheduleRows> }) => {
@@ -86,7 +87,6 @@ const WorkSchedule = (props: parentSchedule) => {
 
   const modalControl = (isState: boolean) => setShowModal(isState)
   const getClickRow = (rowNumber: number) => setRow(rowNumber)
-  const getMonth = (): string => String((new Date().getMonth() + 1));
 
   return (
     <>

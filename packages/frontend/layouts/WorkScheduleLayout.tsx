@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import WorkSchedule from '../parts/WorkSchedule';
 import {WorkScheduleRows, WorkSchedules} from "../lib/data/WorkSchedule";
 import {useForm, useFieldArray, useWatch, Control, SubmitHandler} from "react-hook-form";
-import {getEndDate} from "../lib/CalcDate";
+import {getEndDate, getYearMonthDecode, getYearMonthList} from "../lib/CalcDate";
 
 
 
@@ -75,6 +75,7 @@ const WorkScheduleLayout = () => {
         reset(JSON.parse(localFormData))
     }
 
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-400">対象月を選択してください</label>
@@ -82,11 +83,12 @@ const WorkScheduleLayout = () => {
                     name="yearMonth"
                     id="countries"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option selected value="202207">7月</option>
-                <option value="202206">6月</option>
-                <option value="202205">5月</option>
-                <option value="202204">4月</option>
-                <option value="202203">3月</option>
+            {
+                getYearMonthList().map(data => {
+                    //todo: プロパティでSelected持たせる
+                    return <option key={Number(data)} value={data}>{getYearMonthDecode(data)}月</option>;
+                })
+            }
             </select>
             <button>保存</button>
             <div className="flex flex-col">
