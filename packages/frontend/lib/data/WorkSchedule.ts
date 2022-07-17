@@ -21,9 +21,12 @@ export type WorkScheduleType = {
     resultTime: string
 };
 
+export type WorkScheduleData = [
+    WorkScheduleRows
+];
 
 export type WorkScheduleRows = {
-    // YearMonth: any,
+    yearMonth: string,
     WorkScheduleRow: WorkScheduleType[]
 };
 
