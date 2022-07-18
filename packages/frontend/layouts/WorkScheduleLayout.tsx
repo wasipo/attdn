@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import WorkSchedule from '../parts/WorkSchedule';
-import {WorkScheduleRows, WorkSchedules} from "../lib/data/WorkSchedule";
+import {WorkScheduleRows, WorkSchedules, WorkScheduleType} from "../lib/data/WorkSchedule";
 import {useForm, useFieldArray, useWatch, Control, SubmitHandler} from "react-hook-form";
 import {getEndDate, getYearMonthDecode, getYearMonthList} from "../lib/CalcDate";
 
@@ -15,7 +15,7 @@ const WorkScheduleLayout = () => {
 
     const date = new Date();
 
-    const createField = ():Object[] => {
+    const createField = ():WorkScheduleType[] => {
         let result = [];
         for (let i = 0; i < getEndDate(date)-1; i++)
         {

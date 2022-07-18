@@ -46,11 +46,11 @@ export type OverTimes = {
 
 export const WorkSchedules = (row:number):WorkScheduleType => {
     return {
-        'rowNumber' : row,
-        'startDate' : '00:00',
-        'endDate' : '00:00',
-        'restTime' : '00:00',
-        'resultTime': '00:00'
+        rowNumber : row,
+        startDate : '00:00',
+        endDate : '00:00',
+        restTime : '00:00',
+        resultTime: '00:00'
     }
 }
 
