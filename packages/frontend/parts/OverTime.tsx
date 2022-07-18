@@ -5,7 +5,14 @@ import {OverTimes, WorkScheduleRows, WorkSchedules} from "../lib/data/WorkSchedu
 import {getEndDate} from "../lib/CalcDate";
 
 
-export const OverTime = (Props: { rowNumber: number }) => {
+interface workSchedule {
+  rowNumber: number,
+  register: Function,
+  inputName: string
+}
+
+
+export const OverTime = (props:workSchedule) => {
 
   // const createField = ():Object[] => {
   //     let result = [];
@@ -43,16 +50,15 @@ export const OverTime = (Props: { rowNumber: number }) => {
   return (
     <>
       <form>
-        {(() => {
-          let parent: Array<JSX.Element> = [];
-          for (let i: number = 0; i < Props.rowNumber; i++)
-            parent.push(<div className="mt-2">
-              <StartOverTime/>
-              <EndOverTime/>
-            </div>)
-          return parent;
-        })()}
-        <TotalOverTime/>
+        {/*todo: ダイナミックに追加したいけど、一旦Staticで追加。*/}
+        <StartOverTime rowNumber={0} register={props.register} inputName={'startOverTime0'} />
+        <EndOverTime rowNumber={0} register={props.register} inputName={'startOverTime0'}/>
+        <StartOverTime rowNumber={1} register={props.register} inputName={'startOverTime1'} />
+        <EndOverTime rowNumber={1} register={props.register} inputName={'startOverTime1'}/>
+        <StartOverTime rowNumber={2} register={props.register} inputName={'startOverTime2'} />
+        <EndOverTime rowNumber={2} register={props.register} inputName={'startOverTime2'}/>
+        {/*todo: 確定と同時に当日作業時間に反映させるので、Totalは一旦出さない*/}
+        {/*<TotalOverTime/>*/}
       </form>
     </>
 

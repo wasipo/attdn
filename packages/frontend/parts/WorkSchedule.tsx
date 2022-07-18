@@ -123,7 +123,7 @@ const WorkSchedule = (props: parentSchedule) => {
           );
         })
       }
-      <Modal isShow={isShow} targetRow={targetRow} modalContol={modalControl} cancelButtonRef={cancelButtonRef}/>
+      <Modal register={register} isShow={isShow} targetRow={targetRow} modalControl={modalControl} cancelButtonRef={cancelButtonRef}/>
       {/*<ResultAttendanceTime control={control}/>*/}
     </>
   )
