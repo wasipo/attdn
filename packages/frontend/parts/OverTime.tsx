@@ -1,14 +1,16 @@
 import {useEffect, useState} from 'react';
 import {StartOverTime, EndOverTime, TotalOverTime} from './Modal';
 import {useForm, useFieldArray, useWatch, Control} from "react-hook-form";
-import {OverTimes, WorkScheduleRows, WorkSchedules} from "../lib/data/WorkSchedule";
+import {OverTimes, WorkScheduleRows, WorkSchedules, WorkScheduleType} from "../lib/data/WorkSchedule";
 import {getEndDate} from "../lib/CalcDate";
+import workSchedule from "./WorkSchedule";
 
 
 interface workSchedule {
   rowNumber: number,
   register: Function,
   inputName: string
+  workScheduleType: WorkScheduleType
 }
 
 
@@ -49,7 +51,6 @@ export const OverTime = (props:workSchedule) => {
 
   return (
     <>
-      <form>
         {/*todo: ダイナミックに追加したいけど、一旦Staticで追加。*/}
         <StartOverTime rowNumber={0} register={props.register} inputName={'startOverTime0'} />
         <EndOverTime rowNumber={0} register={props.register} inputName={'startOverTime0'}/>
@@ -59,7 +60,6 @@ export const OverTime = (props:workSchedule) => {
         <EndOverTime rowNumber={2} register={props.register} inputName={'startOverTime2'}/>
         {/*todo: 確定と同時に当日作業時間に反映させるので、Totalは一旦出さない*/}
         {/*<TotalOverTime/>*/}
-      </form>
     </>
 
 

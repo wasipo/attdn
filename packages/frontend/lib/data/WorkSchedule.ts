@@ -57,6 +57,14 @@ export const WorkSchedules = (row: number):WorkScheduleType =>
         {
           startOverTime: '00:00',
           endOverTime: '00:00'
+        },
+        {
+          startOverTime: '00:00',
+          endOverTime: '00:00'
+        },
+        {
+          startOverTime: '00:00',
+          endOverTime: '00:00'
         }
       ]
     }

@@ -91,7 +91,7 @@ const WorkSchedule = (props: parentSchedule) => {
   return (
     <>
       {
-        controlledFields.map((field, i: number) => {
+        controlledFields.map((field: { rowNumber: number; startDate: string; endDate: string; restTime: string; resultTime: string }, i: number) => {
           const name: Array<string> = ['startDate', 'endDate', 'restTime', 'resultTime'];
 
           // 子コンポーネント化したフォームからSubmitキック
@@ -123,7 +123,7 @@ const WorkSchedule = (props: parentSchedule) => {
           );
         })
       }
-      <Modal register={register} isShow={isShow} targetRow={targetRow} modalControl={modalControl} cancelButtonRef={cancelButtonRef}/>
+      <Modal register={register} isShow={isShow} targetRow={targetRow} modalControl={modalControl} fields={controlledFields} cancelButtonRef={cancelButtonRef}/>
       {/*<ResultAttendanceTime control={control}/>*/}
     </>
   )
