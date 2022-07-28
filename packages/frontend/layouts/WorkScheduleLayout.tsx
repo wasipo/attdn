@@ -21,6 +21,7 @@ const WorkScheduleLayout = () => {
         {
             result[i] = WorkSchedules(i+1);
         }
+        console.log(result[0].overTimes.overTimeItems[0].startOverTime);
         return result;
     };
 
@@ -68,6 +69,8 @@ const WorkScheduleLayout = () => {
         reset(JSON.parse(localFormData))
     }
 
+
+    console.log(JSON.stringify(getValues('WorkScheduleRow')));
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

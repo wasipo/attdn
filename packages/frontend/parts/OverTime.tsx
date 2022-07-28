@@ -9,12 +9,12 @@ import workSchedule from "./WorkSchedule";
 interface workSchedule {
   rowNumber: number,
   register: Function,
-  inputName: string
   workScheduleType: WorkScheduleType
 }
 
 
 export const OverTime = (props:workSchedule) => {
+
 
   // const createField = ():Object[] => {
   //     let result = [];
@@ -49,17 +49,12 @@ export const OverTime = (props:workSchedule) => {
 
   // modal毎に永続化する必要がある
 
+
+
   return (
     <>
-        {/*todo: ダイナミックに追加したいけど、一旦Staticで追加。*/}
-        <StartOverTime rowNumber={0} register={props.register} inputName={'startOverTime0'} />
-        <EndOverTime rowNumber={0} register={props.register} inputName={'startOverTime0'}/>
-        <StartOverTime rowNumber={1} register={props.register} inputName={'startOverTime1'} />
-        <EndOverTime rowNumber={1} register={props.register} inputName={'startOverTime1'}/>
-        <StartOverTime rowNumber={2} register={props.register} inputName={'startOverTime2'} />
-        <EndOverTime rowNumber={2} register={props.register} inputName={'startOverTime2'}/>
-        {/*todo: 確定と同時に当日作業時間に反映させるので、Totalは一旦出さない*/}
-        {/*<TotalOverTime/>*/}
+        <StartOverTime rowNumber={props.rowNumber} register={props.register} inputName={'startOverTime'} />
+        <EndOverTime rowNumber={props.rowNumber} register={props.register} inputName={'startOverTime0'} />
     </>
 
 

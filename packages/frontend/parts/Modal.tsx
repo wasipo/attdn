@@ -5,12 +5,29 @@ type workSchedule = {
   inputName: string
 }
 
+interface formType {
+  required: boolean,
+  valueAsNumber: boolean,
+  valueAsString: boolean
+}
+
 export const StartOverTime = (props: workSchedule) => {
+
+  const partsAttr: formType = {
+    required: true,
+    valueAsNumber: false,
+    valueAsString: true,
+  }
+
+
   return (
     <div className="mt-6 block">
       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="startOverTime">残業開始時間</label>
-      <input name="startOverTime" type="text"
-             className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md border"/>
+      <input name="startOverTime"
+             type="text"
+             className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md border"
+             {...props.register(`WorkScheduleRow.0.overTimes.overTimeItems.0.startOverTime` as const, partsAttr)}
+      />
     </div>
   )
 };

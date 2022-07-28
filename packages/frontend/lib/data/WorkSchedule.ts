@@ -37,7 +37,6 @@ export type WorkScheduleData = [
 export type WorkScheduleRows = {
   yearMonth: string,
   WorkScheduleRow: WorkScheduleType[]
-  OverTimes: OverTimes
 };
 
 
