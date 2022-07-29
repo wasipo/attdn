@@ -9,7 +9,8 @@ import workSchedule from "./WorkSchedule";
 interface workSchedule {
   rowNumber: number,
   register: Function,
-  workScheduleType: WorkScheduleType
+  workScheduleType: WorkScheduleType,
+  fields: WorkScheduleType[]
 }
 
 
@@ -21,8 +22,18 @@ export const OverTime = (props:workSchedule) => {
 
   return (
     <>
-        <StartOverTime rowNumber={props.rowNumber} register={props.register} inputName={'startOverTime'} />
-        <EndOverTime rowNumber={props.rowNumber} register={props.register} inputName={'startOverTime0'} />
+      {
+        overTimeItems.map((item,index) => {
+
+          return (
+            <>
+              <StartOverTime rowNumber={props.rowNumber} register={props.register} inputName={'startOverTime'} key={'st'+index} fieldRowNumber={index} />
+              <EndOverTime rowNumber={props.rowNumber} register={props.register} inputName={'startOverTime'} key={'en'+index} fieldRowNumber={index} />
+            </>
+          )
+
+        })
+      }
     </>
 
 

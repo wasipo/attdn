@@ -66,7 +66,7 @@ export const Modal = (props: WorkScheduleProps) => {
                     <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
                       追加作業時間入力
                     </Dialog.Title>
-                    <OverTime rowNumber={props.targetRow} register={props.register} workScheduleType={getModalRow()} />
+                    <OverTime rowNumber={props.targetRow} fields={props.fields} register={props.register} workScheduleType={getModalRow()} />
                   </div>
                 </div>
               </div>

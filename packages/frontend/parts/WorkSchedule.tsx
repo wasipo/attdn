@@ -86,7 +86,7 @@ const WorkSchedule = (props: parentSchedule) => {
   return (
     <>
       {
-        controlledFields.map((field: { rowNumber: number; startDate: string; endDate: string; restTime: string; resultTime: string }, i: number) => {
+        controlledFields.map((field, i: number) => {
           const name: Array<string> = ['startDate', 'endDate', 'restTime', 'resultTime'];
 
           // 子コンポーネント化したフォームからSubmitキック

@@ -2,7 +2,8 @@
 type workSchedule = {
   rowNumber: number,
   register: Function,
-  inputName: string
+  inputName: string,
+  fieldRowNumber: number
 }
 
 interface formType {

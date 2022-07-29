@@ -111,7 +111,7 @@ const WorkScheduleLayout = () => {
                                 </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                <WorkSchedule controlledFields={controlledFields} control={control} register={register} />
+                                <WorkSchedule controlledFields={controlledFields} control={control} register={register}  />
                                 </tbody>
                             </table>
                         </div>
