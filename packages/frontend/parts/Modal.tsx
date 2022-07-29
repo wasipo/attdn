@@ -7,12 +7,7 @@ type workSchedule = {
   fieldRowNumber: number
 }
 
-
-
 export const StartOverTime = (props: workSchedule) => {
-
-
-
   return (
     <div className="mt-6 block">
       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="startOverTime">残業開始時間</label>
@@ -26,7 +21,6 @@ export const StartOverTime = (props: workSchedule) => {
 };
 
 export const EndOverTime = (props: workSchedule) => {
-
   return (
     <div className="mt-3 block">
       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="endOverTime">残業終了時間</label>
@@ -37,7 +31,6 @@ export const EndOverTime = (props: workSchedule) => {
     </div>
   )
 };
-
 
 export const TotalOverTime = () => {
   return (

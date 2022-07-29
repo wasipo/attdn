@@ -21,17 +21,13 @@ export const AddFunction = (props: WorkScheduleProps) => {
   );
 }
 
-
 type CompleteButton = {
   rowNumber: number,
-  formName: string[],
-  control: any
-  useWatch: Function
 }
 
 export const CompleteButton = (props: CompleteButton) => {
   return (
-    <button type="button"
+    <button type="submit"
             className='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>入力完了</button>
   );
 }

@@ -1,3 +1,4 @@
+import {OverTimeItems} from "./data/WorkSchedule";
 
 export class CalcTimeHour {
 
@@ -13,11 +14,27 @@ export class CalcTimeHour {
 
 }
 
-export const getWorkTime = (startDate: string,endDate: string,restTime: string) => {
+export const getWorkTime = (startDate: string,endDate: string,restTime: string, overTimes: OverTimeItems) => {
     const [startHr,startMn] = startDate.split(':');
     const [endHr,endMn] = endDate.split(':');
     const [restHr,restMn] = restTime.split(':');
-    const hr = (Number(endHr) - Number(startHr)) - Number(restHr);
+
+    // reduce使うとエラーになるので、Eachでやる
+    let overTimeHr = 0;
+    let overTimeMn = 0;
+    overTimes.forEach(overTime => {
+
+        const [prHrSt,prMnSt] = overTime.startOverTime.split(':');
+        const [prHrEn,prMnEn] = overTime.endOverTime.split(':');
+
+        overTimeHr += ((Number(prHrEn) - Number(prHrSt)))
+        overTimeMn += ((Number(prMnEn) - Number(prMnSt)))
+
+    })
+
+    console.log(overTimeHr);
+
+    const hr = ((Number(endHr) - Number(startHr))) - Number(restHr);
     const mn = (Number(endMn) - Number(startMn)) - Number(restMn);
 
     return String(('00'+hr).slice(-2))+':'+String(('00'+(mn)).slice(-2));

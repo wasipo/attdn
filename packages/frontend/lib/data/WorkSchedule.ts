@@ -23,12 +23,13 @@ export type WorkScheduleType = {
 
 export type OverTimes = {
     totalOverTime: string
-    overTimeItems:
-      {
-        startOverTime: string
-        endOverTime: string
-      }[]
+    overTimeItems: OverTimeItems
 };
+
+export type OverTimeItems = {
+  startOverTime: string
+  endOverTime: string
+}[];
 
 export type WorkScheduleData = [
   WorkScheduleRows

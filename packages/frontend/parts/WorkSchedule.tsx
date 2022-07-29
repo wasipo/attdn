@@ -96,29 +96,46 @@ const WorkSchedule = (props: parentSchedule) => {
                 {getMonth() + '/' + field.rowNumber}{setDayOfWeekColor(getDayOfWeek(i), i)}
               </td>
               <td key={KeyName.attendance + i} className="px-6 py-4 whitespace-nowrap">
-                <Attendance register={register} key={'at' + i} rowNumber={i} inputName={name[0]}/>
+                <Attendance
+                  register={register}
+                  key={'at' + i}
+                  rowNumber={i}
+                  inputName={name[0]}/>
               </td>
               <td key={KeyName.leave + i} className="px-6 py-4 whitespace-nowrap">
-                <ClockingOut register={register} key={'cl' + i} rowNumber={i} inputName={name[1]}/>
+                <ClockingOut
+                  register={register}
+                  key={'cl' + i}
+                  rowNumber={i}
+                  inputName={name[1]}/>
               </td>
               <td key={KeyName.rest + i} className="px-6 py-4 whitespace-nowrap">
-                <RestTime register={register} key={'re' + i} rowNumber={i} inputName={name[2]}/>
+                <RestTime
+                  register={register}
+                  key={'re' + i}
+                  rowNumber={i}
+                  inputName={name[2]}/>
               </td>
               <td key={KeyName.result + i} className="px-6 py-4 whitespace-nowrap">
                 <ResultTodayAttendance register={register}
                                        key={'res' + i}
                                        rowNumber={i}
                                        inputName={name[3]}
-                                       workTime={getWorkTime(field.startDate, field.endDate, field.restTime)}/>
+                                       workTime={getWorkTime(field.startDate, field.endDate, field.restTime, field.overTimes.overTimeItems)}
+                />
               </td>
               <td key={KeyName.addFc + i} className="px-6 py-4 whitespace-nowrap">
                 <AddFunction key={'ad' + i} modalControl={modalControl} getClickRow={getClickRow} rowNumber={i}/>
+              </td>
+              <td key={KeyName.complete + i} className="px-6 py-4 whitespace-nowrap">
+                <CompleteButton key={'cp' + i} rowNumber={i} />
               </td>
             </tr>
           );
         })
       }
-      <Modal register={register} isShow={isShow} targetRow={targetRow} modalControl={modalControl} fields={controlledFields} cancelButtonRef={cancelButtonRef}/>
+      <Modal register={register} isShow={isShow} targetRow={targetRow} modalControl={modalControl}
+             fields={controlledFields} cancelButtonRef={cancelButtonRef}/>
       {/*<ResultAttendanceTime control={control}/>*/}
     </>
   )

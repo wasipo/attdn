@@ -1,4 +1,4 @@
-import {partsAttr} from "../lib/data/WorkSchedule";
+import {OverTimes, partsAttr} from "../lib/data/WorkSchedule";
 
 type workSchedule = {
   rowNumber: number,

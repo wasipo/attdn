@@ -3,7 +3,7 @@ import WorkSchedule from '../parts/WorkSchedule';
 import {WorkScheduleRows, WorkSchedules, WorkScheduleType} from "../lib/data/WorkSchedule";
 import {useForm, useFieldArray, useWatch, Control, SubmitHandler} from "react-hook-form";
 import {getEndDate, getYearMonthDecode, getYearMonthList} from "../lib/CalcDate";
-
+import Summary from '../parts/Summary'
 
 
 
@@ -69,6 +69,8 @@ const WorkScheduleLayout = () => {
     }
 
     return (
+        <>
+        <Summary />
         <form onSubmit={handleSubmit(onSubmit)}>
             <button>保存</button>
             <div className="flex flex-col">
@@ -108,6 +110,9 @@ const WorkScheduleLayout = () => {
                                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         残業等追加情報
                                     </th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                      内容保存
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
@@ -118,8 +123,8 @@ const WorkScheduleLayout = () => {
                     </div>
                 </div>
             </div>
-
         </form>
+        </>
     )
 
 }
