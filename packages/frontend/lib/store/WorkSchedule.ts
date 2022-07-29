@@ -7,9 +7,6 @@ export type WorkScheduleState = {
     workSchedule: WorkScheduleArray
 }
 
-export type UpdateWorkSchedulePayload = WorkScheduleType
-export type AddWorkSchedulePayload = WorkScheduleType
-
 const getYoctoTime = (_d:Date) => {
     return new Date(_d.getFullYear(), _d.getMonth(), _d.getDate(), 0, 0, 0);
 }
@@ -19,8 +16,6 @@ const initialState: WorkScheduleState = {
 
     ],
 }
-
-const hogeState: number = 0;
 
 export const WorkScheduleRow = createSlice({
     name: 'workSchedule',
