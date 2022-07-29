@@ -27,18 +27,27 @@ export const StartOverTime = (props: workSchedule) => {
       <input name="startOverTime"
              type="text"
              className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md border"
-             {...props.register(`WorkScheduleRow.0.overTimes.overTimeItems.0.startOverTime` as const, partsAttr)}
+             {...props.register(`WorkScheduleRow.${props.rowNumber}.overTimes.overTimeItems.${props.fieldRowNumber}.startOverTime` as const, partsAttr)}
       />
     </div>
   )
 };
 
 export const EndOverTime = (props: workSchedule) => {
+
+  const partsAttr: formType = {
+    required: true,
+    valueAsNumber: false,
+    valueAsString: true,
+  }
+
   return (
     <div className="mt-3 block">
       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="endOverTime">残業終了時間</label>
       <input name="endOverTime" type="text"
-             className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md border"/>
+             className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md border"
+             {...props.register(`WorkScheduleRow.${props.rowNumber}.overTimes.overTimeItems.${props.fieldRowNumber}.endOverTime` as const, partsAttr)}
+      />
     </div>
   )
 };
