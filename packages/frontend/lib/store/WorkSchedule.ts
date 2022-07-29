@@ -30,7 +30,7 @@ export const WorkScheduleRow = createSlice({
     //   updateUser(state, action: PayloadAction<UpdateUserPayload>) {
     //     state.workSchedule = action.payload
     //   },
-        addWorkSchedule(state, action: PayloadAction<AddWorkSchedulePayload>) {
+        addWorkSchedule(state, action: PayloadAction<WorkScheduleType>) {
             void state.workSchedule.push(action.payload)
         },
 
@@ -40,11 +40,9 @@ export const WorkScheduleRow = createSlice({
     },
 })
 
-
 export const rootReducer = combineReducers({
     workScheduleRow: WorkScheduleRow.reducer,
 });
-export type workScheduleRowState = ReturnType<typeof rootReducer>
 
 export const setupStore = () => {
     const middlewares = [...getDefaultMiddleware()];

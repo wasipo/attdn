@@ -16,12 +16,6 @@ interface workSchedule {
 export const OverTime = (props:workSchedule) => {
 
 
-  // const createField = ():Object[] => {
-  //     let result = [];
-  //
-  //     return result;
-  // };
-
 
   // useEffect(() => {
   //     const localFormData = localStorage.getItem('modal') as string;

@@ -39,9 +39,6 @@ export type WorkScheduleRows = {
   WorkScheduleRow: WorkScheduleType[]
 };
 
-
-
-
 export const WorkSchedules = (row: number):WorkScheduleType =>
 {
   return {
@@ -69,12 +66,3 @@ export const WorkSchedules = (row: number):WorkScheduleType =>
     }
   }
 }
-
-// export const OverTimes = (row:number) => {
-//     return {
-//         'rowNumber' : row,
-//         'startOverTime' : '00:00',
-//         'endOverTime' : '00:00',
-//         'arrow' : created,
-//     }
-// }
