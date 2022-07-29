@@ -1,3 +1,4 @@
+import {partsAttr} from "../lib/data/WorkSchedule";
 
 type workSchedule = {
   rowNumber: number,
@@ -6,19 +7,10 @@ type workSchedule = {
   fieldRowNumber: number
 }
 
-interface formType {
-  required: boolean,
-  valueAsNumber: boolean,
-  valueAsString: boolean
-}
+
 
 export const StartOverTime = (props: workSchedule) => {
 
-  const partsAttr: formType = {
-    required: true,
-    valueAsNumber: false,
-    valueAsString: true,
-  }
 
 
   return (
@@ -34,12 +26,6 @@ export const StartOverTime = (props: workSchedule) => {
 };
 
 export const EndOverTime = (props: workSchedule) => {
-
-  const partsAttr: formType = {
-    required: true,
-    valueAsNumber: false,
-    valueAsString: true,
-  }
 
   return (
     <div className="mt-3 block">

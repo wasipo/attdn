@@ -66,3 +66,15 @@ export const WorkSchedules = (row: number):WorkScheduleType =>
     }
   }
 }
+
+interface formType {
+  required: boolean,
+  valueAsNumber: boolean,
+  valueAsString: boolean
+}
+
+export const partsAttr: formType = {
+  required: true,
+  valueAsNumber: false,
+  valueAsString: true,
+}
