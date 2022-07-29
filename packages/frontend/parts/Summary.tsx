@@ -7,7 +7,7 @@ const Summary = () => {
   return (
     <>
       <div className="flex flex-wrap">
-        <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4 drop-shadow-sm">
+        <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:w-1/4 drop-shadow-sm">
           <div
             className="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded bg-clip-border">
             <div className="flex-auto p-4">
@@ -53,7 +53,7 @@ const Summary = () => {
           </div>
         </div>
 
-        <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4 drop-shadow-sm">
+        <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:w-1/4 drop-shadow-sm">
           <div
             className="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded bg-clip-border">
             <div className="flex-auto p-4">
@@ -76,7 +76,7 @@ const Summary = () => {
           </div>
         </div>
 
-        <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4 drop-shadow-sm">
+        <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:w-1/4 drop-shadow-sm">
           <div
             className="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded bg-clip-border">
             <div className="flex-auto p-4">
